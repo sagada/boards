@@ -1,6 +1,6 @@
 package com.algo.inc.web.dto;
 
-import com.algo.inc.domain.Board;
+import com.algo.inc.domain.board.Board;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +26,6 @@ public class BoardSaveRequestDto {
                 .title(title)
                 .content(content)
                 .writer("TestUser")
-                .regDt(LocalDateTime.now())
                 .build();
     }
 }

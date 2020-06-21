@@ -1,6 +1,6 @@
 package com.algo.inc.web.dto;
 
-import com.algo.inc.domain.Board;
+import com.algo.inc.domain.board.Board;
 import lombok.Getter;
 
 @Getter

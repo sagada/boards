@@ -1,10 +1,8 @@
-package com.algo.inc.domain;
+package com.algo.inc.domain.user;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.algo.inc.domain.BaseTimeEntity;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +22,6 @@ public class User {
     private String email;
     private String phoneNumber;
 
-    private LocalDateTime chgDt;
-    private LocalDateTime regDt;
     private String regId;
     private String chgId;
 

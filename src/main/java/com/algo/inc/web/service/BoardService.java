@@ -1,6 +1,6 @@
 package com.algo.inc.web.service;
 
-import com.algo.inc.domain.Board;
+import com.algo.inc.domain.board.Board;
 import com.algo.inc.web.dto.BoardResponseDto;
 import com.algo.inc.web.dto.BoardSaveRequestDto;
 import com.algo.inc.web.dto.BoardUpdateRequestDto;

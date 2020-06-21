@@ -1,5 +1,6 @@
-package com.algo.inc.domain;
+package com.algo.inc.domain.board;
 
+import com.algo.inc.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Board {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,17 +23,14 @@ public class Board {
 
     private String title;
     private String content;
-    private LocalDateTime regDt;
     private String writer;
 
-
     @Builder
-    public Board(String title, String content, String writer, LocalDateTime regDt)
+    public Board(String title, String content, String writer)
     {
         this.title = title;
         this.content = content;
         this.writer = writer;
-        this.regDt = regDt;
     }
 
     public void update(String title, String content)

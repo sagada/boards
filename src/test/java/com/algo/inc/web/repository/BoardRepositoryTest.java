@@ -1,11 +1,12 @@
 package com.algo.inc.web.repository;
 
-import com.algo.inc.domain.Board;
+import com.algo.inc.domain.board.Board;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
@@ -40,7 +41,6 @@ public class BoardRepositoryTest {
                                Board.builder()
                                     .title(title)
                                     .content(content)
-                                    .regDt(LocalDateTime.now())
                                     .build());
 
         //when
@@ -50,5 +50,27 @@ public class BoardRepositoryTest {
         Board board = boardLists.get(0);
         assertThat(board.getContent()).isEqualTo(content);
         assertThat(board.getTitle()).isEqualTo(title);
+    }
+
+    @Test
+    public void BaseTimeEntity_등록()
+    {
+        //given
+        LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
+        boardRepository.save(Board.builder()
+                .content("content")
+                .title("title")
+                .build());
+
+        //when
+        List<Board> boardList = boardRepository.findAll();
+
+        //then
+        Board board = boardList.get(0);
+
+        System.out.println(">>>>>>>>>>>>> createDate = " + board.getRegDt() +", modifiedDate = " + board.getChgDt());
+
+        assertThat(board.getRegDt()).isAfter(now);
+        assertThat(board.getChgDt()).isAfter(now);
     }
 }
