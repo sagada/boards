@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RestController(value = "/api/board")
+@RestController
 public class BoardApiController {
 
     private final BoardService boardService;
