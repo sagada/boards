@@ -1,12 +1,15 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Member;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
-public interface MemberRepository extends CrudRepository<Member, String> {
-    @Query("SELECT b FROM Board b")
-    Page<Board> getBoardList(Pageable pageble);
+import java.util.List;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    @Query("SELECT m.uid, count(p) FROM Member m LEFT OUTER JOIN Profile p ON m.uid = p.member WHERE m.uid = ?1 GROUP BY m")
+    List<Object[]> getMemberWithProfileCount(String uid);
+
+    @Query("SELECT m.uid, p.fname FROM Member m LEFT OUTER JOIN Profile p ON m.uid = p.member WHERE m.uid = ?1 AND p.current = true")
+    List<Object[]> getMemberProfile(String uid);
 }

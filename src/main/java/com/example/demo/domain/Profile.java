@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
+@ToString(exclude = "member")
 @Getter
 @Setter
 @Table(name ="tbl_profile")
@@ -17,6 +17,9 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fno;
+
+    @ManyToOne
+    private Member member;
 
     private String fname;
     private boolean current;
