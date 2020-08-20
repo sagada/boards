@@ -12,9 +12,11 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -80,5 +82,32 @@ public class PDBBoardTests {
 
             pdsBoardRepository.save(pds);
         });
+    }
+
+    @Test
+    public void insertDummies(){
+        List<PDSBoard> list = new ArrayList<>();
+
+        IntStream.range(1, 100).forEach(i->{
+            PDSBoard pds = new PDSBoard();
+
+            pds.setPanme("자료" + i);
+
+            PDSFile file1 = new PDSFile();
+            file1.setPdsfile("file1.doc");
+
+            PDSFile file2 = new PDSFile();
+            file2.setPdsfile("file2.doc");
+
+
+            pds.setPdsFileList(Arrays.asList(file1, file2));
+
+            log.info("try to save pds");
+
+            list.add(pds);
+        });
+
+        pdsBoardRepository.saveAll(list);
+
     }
 }
