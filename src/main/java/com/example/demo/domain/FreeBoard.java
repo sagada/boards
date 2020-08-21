@@ -11,11 +11,11 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-@ToString
+@ToString(exclude = "replyList")
 @Getter
 @Setter
 @Entity
-@Table("tbl_boards")
+@Table(name = "tbl_boards")
 @EqualsAndHashCode(of = "bno")
 public class FreeBoard {
     @Id
@@ -31,7 +31,7 @@ public class FreeBoard {
     @UpdateTimestamp
     private Timestamp updateDate;
 
-    @OneToMany(mappedBy = ***)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<FreeBoardReply> replyList;
 
 }

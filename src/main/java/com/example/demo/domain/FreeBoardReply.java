@@ -12,9 +12,9 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "board")
 @Entity
-@Table(name = "tbl_reply")
+@Table(name = "tbl_reply", indexes = {@Index(unique = false, columnList = "board_bno")})
 @EqualsAndHashCode(of="rno")
 public class FreeBoardReply {
     @Id
@@ -30,5 +30,5 @@ public class FreeBoardReply {
     private Timestamp updateDate;
 
     @ManyToOne
-    private FreeBoard freeBoard;
+    private FreeBoard board;
 }
