@@ -38,6 +38,17 @@ public class PageMaker<T>{
 
     public void calcPages()
     {
+        int tempEndNum = (int)(Math.ceil(this.currentPageNum/ 10.0) * 10);
+        int startNum = tempEndNum - 9;
+
+        Pageable startPage = this.currentPage;
+
+        //move to start pageable
+        for (int i = startNum; i < this.currentPageNum; i++)
+        {
+            startPage = startPage.previousOrFirst();
+        }
+        this.prevPage = startPage.getPageNumber() <= 0 ? null : startPage.previousOrFirst();
 
     }
 }
