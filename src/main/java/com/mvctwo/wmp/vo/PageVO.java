@@ -4,12 +4,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+
 public class PageVO {
     private static final int DEFAULT_SIZE = 10;
     private static final int DEFAULT_MAX_SIZE = 50;
 
     private int page;
     private int size;
+
+    private String keyword;
+    private String type;
 
     public PageVO()
     {
@@ -20,6 +24,22 @@ public class PageVO {
     public int getPage()
     {
         return page;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setPage(int page)

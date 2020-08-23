@@ -4,7 +4,10 @@
       layout:decorate="~{/layout/layout1}">
 
 <div layout:fragment="content">
-    <div class="panel-heading">List Page</div>
+    <div class="panel-heading">게시글 리스트</div>
+    <div class="panel-body pull-right">
+        <h3><a class="label label-default" th:href="@{register}">게시글 등록하기</a> </h3>
+    </div>
     <div class="panel-body">
 
 
@@ -28,8 +31,21 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div>
+                <select id='searchType'>
+                    <option>--</option>
+                    <option value="t" th:selected="${pageVO.type} == 't'">Title</option>
+                    <option value="c" th:selected="${pageVO.type} == 'c'">Content</option>
+                    <option value="w" th:selected="${pageVO.type} == 'w'">Writer</option>
+                </select>
+                <input type="text" id="searchKeyword" th:value="${pageVO.keyword}">
+                <button id="searchBtn">Search</button>
+            </div>
         </div>
 
+
+        <!-- page index 블록 -->
         <nav>
             <div>
                 <ul class="pagination">
@@ -55,6 +71,8 @@
         <form id ='f1' th:action="@{list}" method="get" accept-charset="UTF-8">
             <input type='hidden' name='page' th:value=${result.currentPageNum}>
             <input type='hidden' name='size' th:value=${result.currentPage.pageSize}>
+            <input type="hidden" name='type' th:value=${pageVO.type}>
+            <input type="hidden" name="keyword" th:value=${pageVO.keyword}>
         </form>
 
     </div>
@@ -76,5 +94,28 @@
 
                 formObj.submit();
             });
+
+            $("#searchBtn").click(function(e){
+               var typeStr= $("#searchType").find(":selected").val();
+               var keywordStr = $("#searchKeyword").val();
+
+               console.log(typeStr, "", keywordStr);
+
+               formObj.find("[name='type']").val(typeStr);
+               formObj.find("[name='keyword']").val(keywordStr);
+               formObj.find("[name='page']").val("1");
+               formObj.submit();
+            });
         });
+        $(window).load(function(){
+            var msg = [[${msg}]]
+
+            if(msg == 'success')
+            {
+                alert("정상적으로 처리되었습니다.")
+                var stateObj = {msg : ""}
+            }
+
+        })
+
     </script>
