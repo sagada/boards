@@ -43,12 +43,27 @@ public class PageMaker<T>{
 
         Pageable startPage = this.currentPage;
 
-        //move to start pageable
         for (int i = startNum; i < this.currentPageNum; i++)
         {
             startPage = startPage.previousOrFirst();
         }
+
         this.prevPage = startPage.getPageNumber() <= 0 ? null : startPage.previousOrFirst();
 
+        // page Number가 끝 페이지보다 크면
+        if (this.totalPageNum < tempEndNum)
+        {
+            tempEndNum = this.totalPageNum;
+            this.nextPage = null;
+        }
+
+        for (int i = startNum; i <= tempEndNum; i++)
+        {
+            pageList.add(startPage);
+            startPage = startPage.next();
+        }
+
+        // 다음 페이지 정보 저장
+        this.nextPage = startPage.getPageNumber() + 1 < totalPageNum ? startPage : null;
     }
 }

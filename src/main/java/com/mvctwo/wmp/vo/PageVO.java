@@ -27,7 +27,7 @@ public class PageVO {
         this.page = page < 0 ? 1  :page;
     }
 
-    public int getSize(int size)
+    public int getSize()
     {
         return size;
     }
@@ -41,6 +41,6 @@ public class PageVO {
     {
         Sort.Direction dir = direction == 0 ? Sort.Direction.DESC : Sort.Direction.ASC;
 
-        return PageRequest.of(this. page - 1, this.size, dir, props);
+        return PageRequest.of(this.page - 1, this.size, dir, props);
     }
 }

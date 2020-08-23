@@ -2,6 +2,7 @@ package com.mvctwo.wmp.controller;
 
 import com.mvctwo.wmp.domain.WebBoard;
 import com.mvctwo.wmp.repository.WebBoardRepository;
+import com.mvctwo.wmp.vo.PageMaker;
 import com.mvctwo.wmp.vo.PageVO;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class WebBoardController {
         log.info("" + page);
         log.info("" + result);
 
-        model.addAttribute("result", result);
+        model.addAttribute("result", new PageMaker(result));
     }
 
 }
