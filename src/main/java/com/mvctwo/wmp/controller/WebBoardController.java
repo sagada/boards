@@ -1,6 +1,7 @@
 package com.mvctwo.wmp.controller;
 
 import com.mvctwo.wmp.domain.WebBoard;
+import com.mvctwo.wmp.repository.CustomCrudRepository;
 import com.mvctwo.wmp.repository.WebBoardRepository;
 import com.mvctwo.wmp.vo.PageMaker;
 import com.mvctwo.wmp.vo.PageVO;
@@ -22,14 +23,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class WebBoardController {
 
     @Autowired
-    private WebBoardRepository webBoardRepository;
+    private CustomCrudRepository webBoardRepository;
+//    private WebBoardRepository webBoardRepository;
 
     @GetMapping("/list")
     public void list(@ModelAttribute("pageVO") PageVO vo, Model model)
     {
         Pageable page = vo.makePageable(0, "bno");
-        Page<WebBoard> result = webBoardRepository.findAll(
-                webBoardRepository.makePredicate(vo.getType(), vo.getKeyword()), page);
+        Page<Object[]> result = webBoardRepository.getCustomPage(vo.getType(), vo.getKeyword(), page);
+
         log.info("" + page);
         log.info("" + result);
 
@@ -91,7 +93,6 @@ public class WebBoardController {
 
             rttr.addFlashAttribute("msg", "success");
             rttr.addAttribute("bno", origin.getBno());
-
 
         });
         rttr.addAttribute("page", vo.getPage());
