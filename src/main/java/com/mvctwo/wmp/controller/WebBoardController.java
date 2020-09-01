@@ -24,7 +24,6 @@ public class WebBoardController {
 
     @Autowired
     private CustomCrudRepository webBoardRepository;
-//    private WebBoardRepository webBoardRepository;
 
     @GetMapping("/list")
     public void list(@ModelAttribute("pageVO") PageVO vo, Model model)

@@ -33,16 +33,6 @@ public class CustomCrudRepositoryImpl extends QuerydslRepositorySupport implemen
 
         QWebBoard b = QWebBoard.webBoard;
         QWebReply r = QWebReply.webReply;
-        /*
-            SELECT
-                b.bno, b.title, b.writer, b.regdate
-            FROM
-                webBoard b
-                LEFT OUTER JOIN webReply r
-                ON b.bno = r.board_bno
-            ....
-        */
-
         JPQLQuery<WebBoard> query = from(b);
         JPQLQuery<Tuple> tuple = query.select(b.bno, b.title, r.count(), b.writer, b.regdate);
         tuple.leftJoin(r);
